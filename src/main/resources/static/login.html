@@ -43,13 +43,10 @@
                                     </div>
                                     <form class="user">
                                         <div class="form-group">
-                                            <input type="email" class="form-control form-control-user"
-                                                id="exampleInputEmail" aria-describedby="emailHelp"
-                                                placeholder="Enter Email Address...">
+                                            <label for="emailInput"></label><input type="email" class="form-control form-control-user" id="emailInput" aria-describedby="emailHelp" placeholder="Enter Email Address...">
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control form-control-user"
-                                                id="exampleInputPassword" placeholder="Password">
+                                            <label for="passwordInput"></label><input type="password" class="form-control form-control-user" id="passwordInput" placeholder="Password">
                                         </div>
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
@@ -107,8 +104,10 @@
                 e.preventDefault(); // Prevenir el comportamiento predeterminado del formulario
 
                 // Obtener los datos del formulario
-                const email = $('#exampleInputEmail').val();
-                const password = $('#exampleInputPassword').val();
+                const email = $('#emailInput').val();
+                const password = $('#passwordInput').val();
+
+                console.log(email + " " + password)
 
                 // Crear un objeto para enviar la solicitud HTTP
                 const data = {
@@ -119,7 +118,7 @@
                 // Enviar una solicitud HTTP al servidor
                 $.ajax({
                     type: 'POST',
-                    url: '/login', // Cambiar la URL al punto final de inicio de sesión en el servidor
+                    url: 'http://localhost:8080/login', // Cambiar la URL al punto final de inicio de sesión en el servidor
                     data: data,
                     success: function(response) {
                         // Manejar la respuesta del servidor

@@ -13,10 +13,10 @@ public class LoginController {
 
 
     @PostMapping("/login")
-    public void login(@RequestParam("username") String username, @RequestParam("password") String password) {
+    public void login(@RequestParam("email") String username, @RequestParam("password") String password) {
         System.out.println("Received username: " + username);
         System.out.println("Received password: " + password);
-    
+    }
 
 
 
