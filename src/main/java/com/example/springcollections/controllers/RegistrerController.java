@@ -3,6 +3,7 @@ package com.example.springcollections.controllers;
 import com.example.springcollections.entities.Cliente;
 import com.example.springcollections.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,14 +28,18 @@ public class RegistrerController {
                                            @RequestParam("telefono") String telefono,
                                            @RequestParam("fechaNacimiento") String fechaNacimiento) {
 
-
+        //TODO Se debe generar una cuenta y un tipo
         Cliente cliente = new Cliente(firstName, lastName, email, password, repeatPassword, cedula, direccion, telefono, fechaNacimiento);
 
         if(userService.existeCliente(cliente)){
-            return ResponseEntity.badRequest().body("El cliente ya existe");
+            return ResponseEntity.status(HttpStatus.FOUND)
+                    .header("Location", "/register.html")
+                    .body("");
         }
         userService.register(cliente);
-        return ResponseEntity.ok("Cliente registrado");
+        return ResponseEntity.status(HttpStatus.FOUND)
+                .header("Location", "/tables.html")
+                .body("");
     }
 
 

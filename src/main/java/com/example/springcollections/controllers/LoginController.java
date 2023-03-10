@@ -21,11 +21,9 @@ public class LoginController {
     public ResponseEntity<String> login(@RequestParam String email, @RequestParam String password) {
         if (userService.login(email, password)) {
             // Si el inicio de sesión es correcto, redirigir al usuario a la página de inicio.
-            System.out.println("Login correcto");
             return ResponseEntity.ok("Login correcto");
         } else {
             // Si las credenciales son incorrectas, mostrar un mensaje de error.
-            System.out.println("Login incorrecto");
             return ResponseEntity.badRequest().body("Login incorrecto");
         }
     }

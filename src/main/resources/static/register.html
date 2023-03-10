@@ -156,13 +156,14 @@
                         // Manejar la respuesta del servidor
                         console.log(response);
                         // Redirigir al usuario a la página de inicio después del inicio de sesión exitoso
-                        window.location.href = 'index.html';
+                        window.location.href = response;
                     },
                     error: function(error) {
                         // Manejar errores de solicitud HTTP
                         console.log(error);
                         // Redirigir al usuario a la página de recuperación de contraseña si hay un error
-                        alert("Error al crear la cuenta, intente de nuevo")
+                       // alert("Error al crear la cuenta, intente de nuevo")
+                        window.location.href = error;
                     }
                 });
             });
