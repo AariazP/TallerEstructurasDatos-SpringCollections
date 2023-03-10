@@ -2,6 +2,7 @@ package com.example.springcollections.services;
 
 
 import com.example.springcollections.entities.Cliente;
+import com.example.springcollections.entities.Empleado;
 import com.example.springcollections.entities.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -24,8 +25,15 @@ public class UserService {
         AtomicBoolean login = new AtomicBoolean(false);
 
         userRepository.findAll().forEach(user -> {
-            if(user.getEmail().equals(username) && user.getPassword().equals(password)) {
-                login.set(true);
+            if(user instanceof Cliente cliente) {
+                if(cliente.getEmail().equals(username) && cliente.getPassword().equals(password)) {
+                    login.set(true);
+                }
+            }
+            if(user instanceof Empleado empleado) {
+                if(empleado.getEmail().equals(username) && empleado.getPassword().equals(password)) {
+                    login.set(true);
+                }
             }
         });
         return login.get();
@@ -42,5 +50,22 @@ public class UserService {
     }
 
 
+    public boolean existeCliente(Cliente cliente) {
+        AtomicBoolean existe = new AtomicBoolean(false);
 
+        userRepository.findAll().forEach(user -> {
+            if(user instanceof Cliente cliente1) {
+                if(cliente1.getEmail().equals(cliente.getEmail())) {
+                    existe.set(true);
+                }
+            }
+        });
+        return existe.get();
+
+    }
+
+    public void register(Cliente cliente) {
+        userRepository.save(cliente);
+
+    }
 }

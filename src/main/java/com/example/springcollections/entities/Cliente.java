@@ -29,6 +29,12 @@ public class Cliente extends Persona implements Comparable<Cliente>{
     public Cliente() {
     }
 
+    public Cliente(String firstName, String lastName, String email, String password, String repeatPassword, String cedula, String direccion, String telefono, String fechaNacimiento) {
+        super(firstName, lastName, cedula, direccion, telefono, fechaNacimiento);
+        this.email = email;
+        this.password = password;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

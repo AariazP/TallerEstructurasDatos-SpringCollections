@@ -1,5 +1,6 @@
 package com.example.springcollections.controllers;
 
+import com.example.springcollections.entities.Cliente;
 import com.example.springcollections.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -25,9 +26,15 @@ public class RegistrerController {
                                            @RequestParam("direccion") String direccion,
                                            @RequestParam("telefono") String telefono,
                                            @RequestParam("fechaNacimiento") String fechaNacimiento) {
-        System.out.println(" Llega una request http post a /register");
-        System.out.println("firstName+ = " + firstName + "lastName = " + lastName + "email = " + email + "password = " + password + "repeatPassword = " + repeatPassword + "cedula = " + cedula + "direccion = " + direccion + "telefono = " + telefono + "fechaNacimiento = " + fechaNacimiento);
-        return ResponseEntity.badRequest().body("Registro incorrecto");
+
+
+        Cliente cliente = new Cliente(firstName, lastName, email, password, repeatPassword, cedula, direccion, telefono, fechaNacimiento);
+
+        if(userService.existeCliente(cliente)){
+            return ResponseEntity.badRequest().body("El cliente ya existe");
+        }
+        userService.register(cliente);
+        return ResponseEntity.ok("Cliente registrado");
     }
 
 

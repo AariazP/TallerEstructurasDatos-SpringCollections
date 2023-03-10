@@ -1,10 +1,14 @@
 package com.example.springcollections.entities;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.LinkedList;
 
 @Entity
+@Getter
+@Setter
 public class Empleado extends Persona implements Comparable<Empleado>{
 
     @Id
@@ -12,6 +16,8 @@ public class Empleado extends Persona implements Comparable<Empleado>{
     private Long id;
     private String codigo;
     private String salario;
+    private String email;
+    private String password;
     @OneToMany
     @JoinColumn(name = "empleado_id")
     private LinkedList<Cliente> listaClienteAsociados;

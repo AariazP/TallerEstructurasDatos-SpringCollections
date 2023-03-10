@@ -1,7 +1,20 @@
 package com.example.springcollections.entities;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+@Entity
 public class Persona {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String nombre;
     private String apellido;
     private String cedula;
@@ -22,6 +35,15 @@ public class Persona {
     }
 
     public Persona() {
+    }
+
+    public Persona(String firstName, String lastName, String cedula, String direccion, String telefono, String fechaNacimiento) {
+        this.nombre = firstName;
+        this.apellido = lastName;
+        this.cedula = cedula;
+        this.direccion = direccion;
+        this.telefono = telefono;
+        this.fechaNacimiento = fechaNacimiento;
     }
 
     public void setTo(){}
