@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Register</title>
+    <title>Crea una cuenta</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -30,54 +30,69 @@
             <div class="card-body p-0">
                 <!-- Nested Row within Card Body -->
                 <div class="row">
-                    <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+                    <div class="col-lg-5 d-none d-lg-block bg-register-image" style="background-image: url('/img/createAccount.png')"></div>
                     <div class="col-lg-7">
                         <div class="p-5">
                             <div class="text-center">
-                                <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
+                                <h1 class="h4 text-gray-900 mb-4">Crear una cuenta!</h1>
                             </div>
-                            <form class="user">
-                                <div class="form-group row">
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="text" class="form-control form-control-user" id="exampleFirstName"
-                                            placeholder="First Name">
+                            <form action="/register" method="POST">
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="firstName">Nombre</label>
+                                        <input type="text" class="form-control" id="firstName" name="firstName" required>
                                     </div>
-                                    <div class="col-sm-6">
-                                        <input type="text" class="form-control form-control-user" id="exampleLastName"
-                                            placeholder="Last Name">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <input type="email" class="form-control form-control-user" id="exampleInputEmail"
-                                        placeholder="Email Address">
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="password" class="form-control form-control-user"
-                                            id="exampleInputPassword" placeholder="Password">
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <input type="password" class="form-control form-control-user"
-                                            id="exampleRepeatPassword" placeholder="Repeat Password">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="lastName">Apellido</label>
+                                        <input type="text" class="form-control" id="lastName" name="lastName" required>
                                     </div>
                                 </div>
-                                <a href="login.html" class="btn btn-primary btn-user btn-block">
-                                    Register Account
-                                </a>
-                                <hr>
-                                <a href="index.html" class="btn btn-google btn-user btn-block">
-                                    <i class="fab fa-google fa-fw"></i> Register with Google
-                                </a>
-                                <a href="index.html" class="btn btn-facebook btn-user btn-block">
-                                    <i class="fab fa-facebook-f fa-fw"></i> Register with Facebook
-                                </a>
+                                <div class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <label for="email">Email</label>
+                                        <input type="email" class="form-control" id="email" name="email" required>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="password">Contraseña</label>
+                                        <input type="password" class="form-control" id="password" name="password" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="repeatPassword">Repetir Contraseña</label>
+                                        <input type="password" class="form-control" id="repeatPassword" name="repeatPassword" required>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="cedula">Cédula</label>
+                                        <input type="text" class="form-control" id="cedula" name="cedula" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="telefono">Teléfono</label>
+                                        <input type="text" class="form-control" id="telefono" name="telefono" required>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <label for="direccion">Dirección</label>
+                                        <input type="text" class="form-control" id="direccion" name="direccion" required>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="fechaNacimiento">Fecha de Nacimiento</label>
+                                        <input type="date" class="form-control" id="fechaNacimiento" name="fechaNacimiento" required>
+                                    </div>
+                                </div>
+                                <button class="btn btn-primary btn-block mt-4" type="submit">Registrarse</button>
                             </form>
                             <hr>
                             <div class="text-center">
-                                <a class="small" href="forgot-password.html">Forgot Password?</a>
+                                <a class="small" href="forgot-password.html">Olvidó su contraseña?</a>
                             </div>
                             <div class="text-center">
-                                <a class="small" href="login.html">Already have an account? Login!</a>
+                                <a class="small" href="login.html">Ya tiene una cuenta? Ingrese aquí!</a>
                             </div>
                         </div>
                     </div>
@@ -96,6 +111,57 @@
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
+
+    <script>
+        $(function() {
+            // Manejar el evento submit en el formulario de inicio de sesión
+            $('#login-form').submit(function(e) {
+                e.preventDefault(); // Prevenir el comportamiento predeterminado del formulario
+
+                // Obtener los datos del formulario
+                const name = $('#firstName').val();
+                const lastName = $('#lastName').val();
+                const  email = $('#email').val();
+                const password = $('#password').val();
+                const cedula = $('#cedula').val();
+                const phone = $('#telefono').val();
+                const address = $('#direccion').val();
+                const birthDate = $('#fechaNacimiento').val();
+                // Crear un objeto para enviar la solicitud HTTP
+                const data = {
+                    firstName: name,
+                    lastName: lastName,
+                    email: email,
+                    password: password,
+                    repeatPassword: password,
+                    cedula: cedula,
+                    direccion: address,
+                    telefono: phone,
+                    fechaNacimiento: birthDate
+                };
+
+                // Enviar una solicitud HTTP al servidor
+                $.ajax({
+                    type: 'POST', // Cambiar el método HTTP a POST
+                    url: 'http://localhost:8080/register', // Cambiar la URL al punto final de inicio de sesión en el servidor
+                    data: data,
+                    success: function(response) {
+                        // Manejar la respuesta del servidor
+                        console.log(response);
+                        // Redirigir al usuario a la página de inicio después del inicio de sesión exitoso
+                        window.location.href = 'index.html';
+                    },
+                    error: function(error) {
+                        // Manejar errores de solicitud HTTP
+                        console.log(error);
+                        // Redirigir al usuario a la página de recuperación de contraseña si hay un error
+                        alert("Error al crear la cuenta, intente de nuevo")
+                    }
+                });
+            });
+        });
+
+    </script>
 
 </body>
 
