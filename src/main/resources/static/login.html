@@ -41,23 +41,24 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Bienvenido de nuevo a tu banco </h1>
                                     </div>
-                                    <form class="user">
+                                    <form class="user" id="login-form">
                                         <div class="form-group">
-                                            <label for="emailInput"></label><input type="email" class="form-control form-control-user" id="emailInput" aria-describedby="emailHelp" placeholder="Enter Email Address...">
+                                            <label for="emailInput"></label>
+                                            <input type="email" class="form-control form-control-user" id="emailInput" aria-describedby="emailHelp" placeholder="Enter Email Address...">
                                         </div>
                                         <div class="form-group">
-                                            <label for="passwordInput"></label><input type="password" class="form-control form-control-user" id="passwordInput" placeholder="Password">
+                                            <label for="passwordInput"></label>
+                                            <input type="password" class="form-control form-control-user" id="passwordInput" placeholder="Password">
                                         </div>
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
                                                 <input type="checkbox" class="custom-control-input" id="customCheck">
-                                                <label class="custom-control-label" for="customCheck">Remember
-                                                    Me</label>
+                                                <label class="custom-control-label" for="customCheck">Remember Me</label>
                                             </div>
                                         </div>
-                                        <a href="index.html" class="btn btn-primary btn-user btn-block" id="login-btn">
+                                        <button type="submit" class="btn btn-primary btn-user btn-block" id="login-btn">
                                             Login
-                                        </a>
+                                        </button>
                                         <hr>
                                         <a href="index.html" class="btn btn-google btn-user btn-block">
                                             <i class="fab fa-google fa-fw"></i> Login with Google
@@ -99,8 +100,8 @@
 
     <script>
         $(function() {
-            // Manejar el evento clic en el botón de inicio de sesión
-            $('#login-btn').click(function(e) {
+            // Manejar el evento submit en el formulario de inicio de sesión
+            $('#login-form').submit(function(e) {
                 e.preventDefault(); // Prevenir el comportamiento predeterminado del formulario
 
                 // Obtener los datos del formulario
@@ -114,20 +115,25 @@
 
                 // Enviar una solicitud HTTP al servidor
                 $.ajax({
-                    type: 'POST',
-                    url: 'http://localhost:8080/login', // Cambiar la URL al punto final de inicio de sesión en el servidor
+                    type: 'POST', // Cambiar el método HTTP a POST
+                    url: 'http://localhost:8080/signIn', // Cambiar la URL al punto final de inicio de sesión en el servidor
                     data: data,
                     success: function(response) {
                         // Manejar la respuesta del servidor
                         console.log(response);
+                        // Redirigir al usuario a la página de inicio después del inicio de sesión exitoso
+                        window.location.href = 'index.html';
                     },
                     error: function(error) {
                         // Manejar errores de solicitud HTTP
                         console.log(error);
+                        // Redirigir al usuario a la página de recuperación de contraseña si hay un error
+                        window.location.href = 'forgot-password.html';
                     }
                 });
             });
         });
+
     </script>
 
 </body>

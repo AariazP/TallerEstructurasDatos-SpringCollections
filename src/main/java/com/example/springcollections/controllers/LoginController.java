@@ -16,15 +16,18 @@ public class LoginController {
     }
 
 
-    @PostMapping("/login")
-    public String login(@RequestParam("email") String username, @RequestParam("password") String password) {
-        if(userService.login(username, password)) {
-            return "index.html";
+    @GetMapping("/signIn")
+    public String login(@RequestParam String email, @RequestParam String password) {
+        if (userService.login(email, password)) {
+            // Si el inicio de sesión es correcto, redirigir al usuario a la página de inicio.
+            System.out.println("Login correcto");
+            return "redirect:/index.html";
         } else {
-            return "login.html";
+            // Si las credenciales son incorrectas, mostrar un mensaje de error.
+            System.out.println("Login incorrecto");
+            return "Lo siento, sus credenciales no son válidas. <a href=\"/forgot-password.html\">¿Olvidó su contraseña?</a>";
         }
     }
-
 
 
 
