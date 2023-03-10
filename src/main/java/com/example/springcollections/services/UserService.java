@@ -20,6 +20,7 @@ public class UserService {
 
 
     public boolean login(String username, String password) {
+
         AtomicBoolean login = new AtomicBoolean(false);
 
         userRepository.findAll().forEach(user -> {
@@ -32,7 +33,12 @@ public class UserService {
 
 
     public void register(String username, String password) {
-      //  userRepository.save();
+          Cliente user = new Cliente();
+          user.setEmail(username);
+          user.setPassword(password);
+          System.out.println(" Creado el cliente con: "+user.getEmail()+" y "+user.getPassword() );
+          userRepository.save(user);
+
     }
 
 

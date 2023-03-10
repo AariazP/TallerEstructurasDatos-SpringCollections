@@ -2,7 +2,11 @@ package com.example.springcollections.controllers;
 
 import com.example.springcollections.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.function.EntityResponse;
+
+import javax.swing.text.html.parser.Entity;
 
 @RestController
 public class LoginController {
@@ -16,16 +20,16 @@ public class LoginController {
     }
 
 
-    @GetMapping("/signIn")
-    public String login(@RequestParam String email, @RequestParam String password) {
+    @PostMapping("/signIn")
+    public ResponseEntity<String> login(@RequestParam String email, @RequestParam String password) {
         if (userService.login(email, password)) {
             // Si el inicio de sesión es correcto, redirigir al usuario a la página de inicio.
             System.out.println("Login correcto");
-            return "redirect:/index.html";
+            return ResponseEntity.ok("Login correcto");
         } else {
             // Si las credenciales son incorrectas, mostrar un mensaje de error.
             System.out.println("Login incorrecto");
-            return "Lo siento, sus credenciales no son válidas. <a href=\"/forgot-password.html\">¿Olvidó su contraseña?</a>";
+            return ResponseEntity.badRequest().body("Login incorrecto");
         }
     }
 
