@@ -1,0 +1,1 @@
+Para ejecutar el proyecto se debe correr normalmente, después en el navegador se debe ingresar a la ruta http://localhost:8080/login.html y se podrá ver la aplicación funcionando.

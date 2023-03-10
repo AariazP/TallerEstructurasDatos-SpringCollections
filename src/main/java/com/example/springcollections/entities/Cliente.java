@@ -21,6 +21,10 @@ public class Cliente extends Persona implements Comparable<Cliente>{
     @OneToOne(mappedBy = "cliente")
     private Cuenta cuenta;
 
+    private String email;
+
+    private String password;
+
 
     public Cliente() {
     }

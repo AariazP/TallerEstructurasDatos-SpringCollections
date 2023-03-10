@@ -20,6 +20,9 @@ public class Cuenta implements ICuenta{
     private Banco banco;
     @OneToMany(mappedBy = "cuenta")
     private LinkedList<Transaccion> listaTransacciones;
+    @OneToOne
+    private Cliente cliente;
+
 
     public Cuenta() {
     }

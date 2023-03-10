@@ -13,6 +13,8 @@ public class Transaccion {
     private Double valor;
     @ManyToOne
     private Banco banco;
+    @ManyToOne
+    private Cuenta cuenta;
 
     public Transaccion() {
     }
