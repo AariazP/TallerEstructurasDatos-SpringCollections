@@ -1,15 +1,14 @@
 package com.example.springcollections.services;
 
-
 import com.example.springcollections.entities.Cliente;
 import com.example.springcollections.entities.Empleado;
 import com.example.springcollections.entities.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
-
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.concurrent.atomic.AtomicReference;
 
 @Service
 @Scope("singleton")
@@ -67,5 +66,22 @@ public class UserService {
     public void register(Cliente cliente) {
         userRepository.save(cliente);
 
+    }
+
+    public List<Empleado> getEmpleados() {
+        ArrayList<Empleado> empleados = new ArrayList<>();
+
+
+        userRepository.findAll().forEach(user -> {
+            if(user instanceof Empleado empleado) {
+              empleados.add(empleado);
+            }
+        });
+
+        return empleados;
+    }
+
+    public void registerEmpleado(Empleado empleado4) {
+        userRepository.save(empleado4);
     }
 }

@@ -4,64 +4,54 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 @Entity
-@Getter
-@Setter
+
 public class Empleado extends Persona implements Comparable<Empleado>{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Getter
+    @Setter
     private Long id;
+    @Getter
+    @Setter
     private String codigo;
+    @Getter
+    @Setter
     private String salario;
+    @Getter
+    @Setter
     private String email;
+    @Getter
+    @Setter
     private String password;
     @OneToMany
-    @JoinColumn(name = "empleado_id")
-    private LinkedList<Cliente> listaClienteAsociados;
+    private ArrayList<Cliente> listaClienteAsociados;
     @ManyToOne
     private Banco banco;
 
     public Empleado() {}
 
-    public Empleado(String codigo, String salario) {
-        listaClienteAsociados = new LinkedList<>();
+
+    public Empleado(String firstName, String lastName, String cedula, String direccion, String telefono, String fechaNacimiento, Long id, String codigo, String salario,
+                    String email, String password, Banco banco) {
+        super(firstName, lastName, cedula, direccion, telefono, fechaNacimiento);
+        this.id = id;
         this.codigo = codigo;
         this.salario = salario;
-    }
-
-    public String getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
-    }
-
-    public String getSalario() {
-        return salario;
-    }
-
-    public void setSalario(String salario) {
-        this.salario = salario;
-    }
-
-    public Banco getBanco() {
-        return banco;
-    }
-
-    public void setBanco(Banco banco) {
+        this.email = email;
+        this.password = password;
         this.banco = banco;
+        listaClienteAsociados = new ArrayList<>();
     }
 
-    public LinkedList<Cliente> getListaClienteAsociados() {
-        return listaClienteAsociados;
-    }
-
-    public void setListaClienteAsociados(LinkedList<Cliente> listaClienteAsociados) {
-        this.listaClienteAsociados = listaClienteAsociados;
+    public Empleado(String codigo, String salario) {
+        listaClienteAsociados = new ArrayList<>();
+        this.codigo = codigo;
+        this.salario = salario;
     }
 
     @Override

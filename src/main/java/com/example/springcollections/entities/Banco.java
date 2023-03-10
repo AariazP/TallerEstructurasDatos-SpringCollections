@@ -2,11 +2,13 @@ package com.example.springcollections.entities;
 
 import jakarta.persistence.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.TreeSet;
 @Entity
+@Scope("singleton")
 public class Banco {
 
     @Id
