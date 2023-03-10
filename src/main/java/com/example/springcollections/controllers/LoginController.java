@@ -1,10 +1,14 @@
 package com.example.springcollections.controllers;
 
+import com.example.springcollections.services.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class LoginController {
 
+    @Autowired
+    private UserService userService;
 
     @RequestMapping("/")
     public String login() {
