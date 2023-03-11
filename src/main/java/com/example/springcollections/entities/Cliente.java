@@ -15,9 +15,8 @@ public class Cliente extends Persona implements Comparable<Cliente>{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
+    @JoinColumn(name = "empleado_asociado_id")
     private Empleado empleadoAsociado;
-    @ManyToOne
-    private  Banco banco;
     @OneToOne(mappedBy = "cliente")
     private Cuenta cuenta;
 
@@ -40,12 +39,12 @@ public class Cliente extends Persona implements Comparable<Cliente>{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Cliente cliente = (Cliente) o;
-        return Objects.equals(empleadoAsociado, cliente.empleadoAsociado) && Objects.equals(banco, cliente.banco) && Objects.equals(cuenta, cliente.cuenta);
+        return Objects.equals(empleadoAsociado, cliente.empleadoAsociado)  && Objects.equals(cuenta, cliente.cuenta);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(empleadoAsociado, banco, cuenta);
+        return Objects.hash(empleadoAsociado, cuenta);
     }
 
     @Override

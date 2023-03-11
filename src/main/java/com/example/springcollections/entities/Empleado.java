@@ -3,9 +3,11 @@ package com.example.springcollections.entities;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 @Entity
 
@@ -28,10 +30,9 @@ public class Empleado extends Persona implements Comparable<Empleado>{
     @Getter
     @Setter
     private String password;
-    @OneToMany
-    private ArrayList<Cliente> listaClienteAsociados;
-    @ManyToOne
-    private Banco banco;
+    @OneToMany(mappedBy = "empleadoAsociado")
+    private List<Cliente> listaClienteAsociados;
+
 
     public Empleado() {}
 
@@ -39,13 +40,12 @@ public class Empleado extends Persona implements Comparable<Empleado>{
     public Empleado(String firstName, String lastName, String cedula, String direccion, String telefono, String fechaNacimiento, Long id, String codigo, String salario,
                     String email, String password, Banco banco) {
         super(firstName, lastName, cedula, direccion, telefono, fechaNacimiento);
-        this.id = id;
         this.codigo = codigo;
         this.salario = salario;
         this.email = email;
         this.password = password;
-        this.banco = banco;
-        listaClienteAsociados = new ArrayList<>();
+        this.listaClienteAsociados = new ArrayList<>();
+
     }
 
     public Empleado(String codigo, String salario) {
